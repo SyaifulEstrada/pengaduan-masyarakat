@@ -41,6 +41,11 @@ return [
             'provider' => 'users',
         ],
 
+        'admin' => [
+          'driver' => 'session',
+          'provider' => 'admins'
+        ],
+
         'masyarakat' => [
           'driver' => 'session',
           'provider' => 'masyarakats'
@@ -74,6 +79,11 @@ return [
         'masyarakats' => [
           'driver' => 'eloquent',
           'model' => App\Models\Masyarakat::class,
+        ],
+
+        'admins' => [
+          'driver' => 'eloquent',
+          'model' => App\Models\Petugas::class,
         ],
 
         // 'users' => [

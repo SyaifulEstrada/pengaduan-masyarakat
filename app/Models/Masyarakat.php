@@ -22,4 +22,6 @@ class Masyarakat extends Authenticatable
       'telp'
     ];
 
+    protected $dates = ['tgl_pengaduan'];
+
 }

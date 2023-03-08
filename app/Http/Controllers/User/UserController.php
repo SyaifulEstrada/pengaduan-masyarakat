@@ -6,9 +6,9 @@ use App\Models\Masyarakat;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Pengaduan;
-use Dotenv\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use \Validator;
 
 class UserController extends Controller
 {

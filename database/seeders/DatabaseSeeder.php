@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Petugas;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,7 +15,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
+      Petugas::create([
+        'nama_petugas' => 'Administrator',
+        'username' => 'admin',
+        'password' => Hash::make('password'),
+        'telp' =>  fake()->phoneNumber(),
+        'level' => 'admin',
+      ]);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',

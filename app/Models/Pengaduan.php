@@ -21,4 +21,6 @@ class Pengaduan extends Model
       'status',
     ];
 
+    protected $dates = ['tgl_pengaduan'];
+
 }
