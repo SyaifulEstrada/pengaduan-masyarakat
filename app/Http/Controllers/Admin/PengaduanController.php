@@ -3,6 +3,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Pengaduan;
+use App\Models\Tanggapan;
 
 class PengaduanController extends Controller
 {
@@ -18,7 +19,9 @@ class PengaduanController extends Controller
     {
       $pengaduan = Pengaduan::where('id_pengaduan', $id_pengaduan)->first();
 
-      return view('admin.pengaduan.show', ['pengaduan' => $pengaduan]);
+      $tanggapan = Tanggapan::where('id_pengaduan', $id_pengaduan)->first();
+
+      return view('admin.pengaduan.show', ['pengaduan' => $pengaduan, 'tanggapan' => $tanggapan]);
 
     }
 

@@ -1,16 +1,23 @@
 <?php
 
 namespace App\Http\Controllers\Admin;
-
-use App\Http\Controllers\Controller;
+// use Dotenv\Validator;
+use App\Models\Petugas;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redis;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Validator;
+
 
 class PetugasController extends Controller
 {
     public function index()
     {
-      return view('admin.petugas.index');
+
+      $petugas = Petugas::all();
+
+      return view('admin.petugas.index', ['petugas' => $petugas]);
     }
 
     public function create()
@@ -20,22 +27,70 @@ class PetugasController extends Controller
 
     public function store(Request $request)
     {
-      # code...
+      $data = $request->all();
+
+      $validate = Validator::make($data, [
+        'nama_petugas' => ['required', 'string', 'max:255'],
+        'username' => ['required', 'string', 'unique:petugas'],
+        'password' => ['required', 'string', 'min:3'],
+        'telp' => ['required'],
+        'level' => ['required', 'in:admin,petugas']
+      ]);
+
+      if($validate->fails()) {
+        return redirect()->back()->withErrors($validate);
+      }
+
+      $username = Petugas::where('username', $data['username'])->first();
+
+      if ($username) {
+        return redirect()->back()->with(['username' => 'username sudah digunakan']);
+      }
+
+      Petugas::create([
+        'nama_petugas' => $data['nama_petugas'],
+        'username' => $data['username'],
+        'password' => Hash::make($data['password']),
+        'telp' => $data['telp'],
+        'level' => $data['level'],
+      ]);
+
+      return redirect()->route('petugas.index');
+
     }
 
     public function edit($id_petugas)
     {
-      return view('admin.petugas.edit');
+
+      $petugas = Petugas::where('id_petugas', $id_petugas)->first();
+
+      return view('admin.petugas.edit', ['petugas' => $petugas]);
     }
 
     public function update(Request $request, $id_petugas)
     {
+      $data = $request->all();
+
+      $petugas = Petugas::find($id_petugas);
+
+      $petugas->update([
+        'nama_petugas' => $data['nama_petugas'],
+        'username' => $data['username'],
+        'password' => Hash::make($data['password']),
+        'telp' => $data['telp'],
+        'level' => $data['level'],
+      ]);
+
+      return redirect()->route('petugas.index');
 
     }
 
     public function destroy($id_petugas)
     {
-      # code...
+        $petugas = Petugas::findOrFail($id_petugas);
+        $petugas->delete();
+
+        return redirect()->route('petugas.index');
     }
 
 }

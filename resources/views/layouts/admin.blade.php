@@ -7,6 +7,19 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
   @yield('css')
+  <style>
+    .btn-purple {
+      background: #6a70fc;
+      border: 1px solid #6a70fc;
+      color: white;
+    }
+
+    .btn-purple:hover {
+      background: #6a70fc;
+      border: 1px solid #6a70fc;
+      color: white;
+    }
+  </style>
 
   <title>@yield('title')</title>
 

@@ -47,8 +47,9 @@
       </div>
     </div>
   </nav>
-
 </section>
+
+
 {{-- Section Card --}}
 <div class="container">
   <div class="row justify-content-between">
@@ -63,7 +64,7 @@
           <div class="alert alert-{{ Session::get('type') }}">{{ Session::get('pengaduan') }}</div>
         @endif
         <div class="card mb-3">Tulis Laporan Disini</div>
-        <form action="{{ route('pekat.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('pekat.store') }}" method="POST" enctype="multirt/form-data">
           @csrf
           <div class="form-group">
             <textarea name="isi_laporan" placeholder="Masukkan Isi Laporan" class="form-control" rows="4">{{ old('isi_laporan') }}</textarea>
@@ -74,6 +75,7 @@
           <button type="submit" class="btn btn-custom mt-2">Kirim</button>
         </form>
       </div>
+
     </div>
     <div class="col-lg-4 col-md-12 col-sm-12 col-12 col">
       <div class="content content-bottom shadow">
@@ -158,6 +160,7 @@
       </div>
     @endforeach
   </div>
+
 </div>
 {{-- Footer --}}
 <div class="mt-5">
